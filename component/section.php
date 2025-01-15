@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="md:w-1/2 mt-12 md:mt-0 relative">
             <div class="w-full h-96 rounded-lg relative overflow-hidden">
                 <img src="protfolio-img04.jpg" alt="Hero Image"
