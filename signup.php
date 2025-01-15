@@ -52,6 +52,29 @@
                             class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
                             placeholder="Create a password">
                     </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-3">Select your role</label>
+                        <div class="flex gap-4 justify-center">
+                            <div
+                                class="flex-1 flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer max-w-[240px]">
+                                <input id="student" name="role" type="radio" value="student"
+                                    class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300">
+                                <label for="student" class="ml-3 flex flex-col cursor-pointer">
+                                    <span class="block text-sm font-medium text-gray-900">Student</span>
+                                    <span class="block text-sm text-gray-500">Take courses and learn new skills</span>
+                                </label>
+                            </div>
+
+                            <div class="flex-1 flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer max-w-[240px]">
+                                <input id="assignment" name="role" type="radio" value="assignment"
+                                    class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300">
+                                <label for="assignment" class="ml-3 flex flex-col cursor-pointer">
+                                    <span class="block text-sm font-medium text-gray-900">Assignment</span>
+                                    <span class="block text-sm text-gray-500">Create courses and teach students</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <p class="mt-2 text-sm text-gray-600">
                         Already have an account?
                         <a href="signin.php" class="font-medium text-orange-500 hover:text-orange-600">Sign in</a>
