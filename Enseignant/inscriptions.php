@@ -1,22 +1,17 @@
-            <!-- Enrollments Page -->
             <div class="container inscription hidden p-6" id="enrollments">
                 <div class="max-w-7xl mx-auto">
-                    <!-- Header -->
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-gray-800 mb-2">Gestion des Inscriptions</h1>
                         <p class="text-gray-500">Gérez les étudiants inscrits à vos cours</p>
                     </div>
-                    <!-- Filters and Search -->
                     <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
                         <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                             <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
-                                <!-- Search -->
                                 <div class="relative w-full md:w-64">
                                     <input type="text" placeholder="Rechercher un étudiant..."
                                         class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
                                     <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                                 </div>
-                                <!-- Course Filter -->
                                 <select
                                     class="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
                                     <option value="">Tous les cours</option>
@@ -25,8 +20,6 @@
                                     <option value="data">Science des Données</option>
                                 </select>
                             </div>
-
-                            <!-- Export Button -->
                             <button
                                 class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center">
                                 <i class="fas fa-download mr-2"></i>

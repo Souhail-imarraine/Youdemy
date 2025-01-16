@@ -1,3 +1,7 @@
+<?php
+require_once 'action/signin.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +25,15 @@
                 <h2 class="mt-6 text-3xl font-bold text-teal-800">Welcome back</h2>
             </div>
 
-            <form class="mt-8 space-y-6">
+            <div class="text-center">
+                <?php if(!empty($errors)): ?>
+                <?php foreach($errors as $error): ?>
+                <p class="text-sm text-red-600" id="email-error"><?php echo htmlspecialchars($error);?></p>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+
+            <form class="mt-8 space-y-6" method="post">
                 <div class="space-y-4">
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
@@ -42,8 +54,8 @@
                         </p>
                     </div>
                 </div>
-                
-                <button type="submit"
+
+                <button type="submit" name="signin"
                     class="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                     Sign in
                 </button>

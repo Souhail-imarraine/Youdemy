@@ -67,41 +67,41 @@ class Utilisateur {
 
 
     /***** ==== sign in ====  *****/
-
+    
     public function login($email, $password) {
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             array_push($this->errors, "Format d'email invalide");
             return false;
-        } elseif(empty($password)){
+        } elseif (empty($password)) {
             array_push($this->errors, "Le mot de passe est requis");
             return false;
         }
-
-        if(empty($this->errors)){
-            $query = "SELECT * FROM utilisateur WHERE email = :email LIMIT 1;";
+    
+        if (empty($this->errors)) {
+            $query = "SELECT * FROM utilisateur WHERE email = :email;";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([':email' => $email]);
-            $userExist = $stmt->fetch(PDO:: FETCH_ASSOC);
-            
-            if(!$userExist) {
-                array_push($this->errors, 'Cet email n\'a pas ete trouve');
-                return false ;
-            }else {
-                if(password_verify($password, $userExist['mot_de_passe'])){
+            $userExist = $stmt->fetch(PDO::FETCH_ASSOC); 
+    
+            if (!$userExist) {
+                array_push($this->errors, "Cet email n'a pas ete trouve");
+                return false;
+            } else {
+                if (password_verify($password, $userExist['mot_de_passe'])) {
                     session_start();
-                    $_SESSION['is_login'] = true ;
+                    $_SESSION['is_login'] = true;
                     $_SESSION['id'] = $userExist['id'];
                     $_SESSION['role'] = $userExist['role'];
                     $_SESSION['nom'] = $userExist['nom'];
                     return true;
-                }else{
+                } else {
                     array_push($this->errors, "Mot de passe invalide");
                     return false;
                 }
             }
         }
-
     }
+    
 
     public function getErrors(){
        return $this->errors;
