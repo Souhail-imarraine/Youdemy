@@ -8,7 +8,7 @@ class Utilisateur {
     protected string $role;
     protected string $status = 'active'; 
     protected DateTime $created_at;
-    public $errors = [];
+    private $errors = [];
     private $pdo;
 
     public function __construct($pdo)
@@ -16,7 +16,7 @@ class Utilisateur {
         $this->pdo = $pdo;
     }
 
-        /***** ==== register ====  *****/
+    /***** ==== register ====  *****/
 
     public function register($name, $email, $password, $role){
         if(empty($name)){
@@ -101,6 +101,10 @@ class Utilisateur {
             }
         }
 
+    }
+
+    public function getErrors(){
+       return $this->errors;
     }
 
     public function logout(){

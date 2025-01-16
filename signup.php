@@ -13,9 +13,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CreateAcount'])){
     $role = $_POST['role'];
     $register = $utilisateur->register($name, $email, $password, $role);
     if($register && $role == 'Etudiant'){
-        header('Location: hhhh.php');
-    }else {
-        echo 'makhdamach hadchiii ..' ;
+        // header('Location: students/interface.php');
+        header('Location: signin.php');
+    }elseif($register && $role == 'Enseignant') {
+        // header('Location: Enseignant/dashboardTeatcher.php');
+        header('Location: signin.php');
+    }else{
+        $errors = $utilisateur->getErrors();
     }
 }
 ?>
@@ -39,8 +43,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CreateAcount'])){
     <div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg">
             <div class="text-center">
-                <h2 class="mt-6 text-3xl font-bold text-teal-800">Create an account</h2>
+                <h2 class="text-3xl font-bold text-teal-800">Create an account</h2>
             </div>
+            <div class="text-center">
+                <?php if(!empty($errors)): ?>
+                <?php foreach($errors as $error): ?>
+                <p class="text-sm text-red-600" id="email-error"><?php echo htmlspecialchars($error);?></p>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+
             <form class="mt-8 space-y-6" method="post">
                 <div class="space-y-4">
                     <div class="">
