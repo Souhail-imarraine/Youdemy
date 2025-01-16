@@ -1,3 +1,24 @@
+<?php
+require_once 'config/database.php';
+require_once 'classes/utilisateur.php';
+
+$database = new Database();
+$pdo = $database->getConnection();
+$utilisateur = new Utilisateur($pdo);
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CreateAcount'])){
+    $name = htmlspecialchars($_POST['nom']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $role = $_POST['role'];
+    $register = $utilisateur->register($name, $email, $password, $role);
+    if($register && $role == 'Etudiant'){
+        header('Location: hhhh.php');
+    }else {
+        echo 'makhdamach hadchiii ..' ;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,22 +41,14 @@
             <div class="text-center">
                 <h2 class="mt-6 text-3xl font-bold text-teal-800">Create an account</h2>
             </div>
-
-            <!-- Form -->
-            <form class="mt-8 space-y-6">
+            <form class="mt-8 space-y-6" method="post">
                 <div class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="">
                         <div>
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                            <input id="first-name" name="first-name" type="text" required
+                            <label for="nom" class="block text-sm font-medium text-gray-700">Full name</label>
+                            <input id="nom" name="nom" type="text" required
                                 class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                                placeholder="First name">
-                        </div>
-                        <div>
-                            <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                            <input id="last-name" name="last-name" type="text" required
-                                class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                                placeholder="Last name">
+                                placeholder="name">
                         </div>
                     </div>
 
@@ -57,7 +70,7 @@
                         <div class="flex gap-4 justify-center">
                             <div
                                 class="flex-1 flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer max-w-[240px]">
-                                <input id="student" name="role" type="radio" value="student"
+                                <input id="Etudiant" name="role" type="radio" value="Etudiant"
                                     class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300">
                                 <label for="student" class="ml-3 flex flex-col cursor-pointer">
                                     <span class="block text-sm font-medium text-gray-900">Student</span>
@@ -65,8 +78,9 @@
                                 </label>
                             </div>
 
-                            <div class="flex-1 flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer max-w-[240px]">
-                                <input id="assignment" name="role" type="radio" value="assignment"
+                            <div
+                                class="flex-1 flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer max-w-[240px]">
+                                <input id="Enseignant" name="role" type="radio" value="Enseignant"
                                     class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300">
                                 <label for="assignment" class="ml-3 flex flex-col cursor-pointer">
                                     <span class="block text-sm font-medium text-gray-900">Assignment</span>
@@ -81,7 +95,7 @@
                     </p>
                 </div>
 
-                <button type="submit"
+                <button type="submit" name="CreateAcount"
                     class="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                     Create account
                 </button>
