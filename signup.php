@@ -38,7 +38,7 @@ require_once 'action/register.php';
                         <div>
                             <label for="nom" class="block text-sm font-medium text-gray-700">Full name</label>
                             <input id="nom" name="nom" type="text" required
-                                class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                                 placeholder="name">
                         </div>
                     </div>
@@ -46,14 +46,14 @@ require_once 'action/register.php';
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                         <input id="email" name="email" type="email" required
-                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                             placeholder="Enter your email">
                     </div>
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                         <input id="password" name="password" type="password" required
-                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                             placeholder="Create a password">
                     </div>
                     <div>
@@ -94,5 +94,5 @@ require_once 'action/register.php';
         </div>
     </div>
 </body>
-
+<script src="script/main.js"></script>
 </html>

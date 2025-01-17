@@ -38,13 +38,13 @@ require_once 'action/signin.php';
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                         <input id="email" name="email" type="email" required
-                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
                             placeholder="Enter your email">
                     </div>
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                         <input id="password" name="password" type="password" required
-                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                            class="mt-1 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                             placeholder="Enter your password">
                     </div>
                     <div class="text-center">
@@ -62,6 +62,7 @@ require_once 'action/signin.php';
             </form>
         </div>
     </div>
+    <script src="script/main.js"></script>
 </body>
 
 </html>
