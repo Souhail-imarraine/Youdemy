@@ -1,3 +1,15 @@
+<?php
+require_once './config/database.php';
+require_once './classes/cours.php';
+
+$database = new Database();
+$pdo = $database->getConnection();
+
+$cours = new Cours($pdo);
+$getAllCourses = $cours->selectAllCourses();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
