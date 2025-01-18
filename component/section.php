@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="md:w-1/2 mt-12 md:mt-0 relative">
             <div class="w-full h-96 rounded-lg relative overflow-hidden">
                 <img src="protfolio-img04.jpg" alt="Hero Image"
@@ -67,10 +67,13 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <?php foreach($getAllCourses as $cours): ?>
         <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
+            <div
+                class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $cours['Image_couverture']; ?>')] bg-cover bg-center">
                 <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
             </div>
+            
             <div class="p-6">
                 <div class="flex items-center mb-4">
                     <div class="flex -space-x-2">
@@ -80,10 +83,9 @@
                     </div>
                     <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
                 </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
+                <p class="text-sm text-gray-500"><?php echo $cours['date_creation'];?></p>
+                <h3 class="text-xl font-bold text-teal-700 mt-2"><?php echo $cours['titre'];?></h3>
+                <p class="text-sm text-gray-600 mt-2"><?php echo $cours['description'];?></p>
                 <div class="flex items-center justify-between mt-4">
                     <div class="flex items-center">
                         <span class="text-[#FF6B38] font-bold">$380</span>
@@ -94,141 +96,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div class="bg-[#00BFB3] p-8 flex items-center justify-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500">28 July 2022</p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2">Product Management Basic - Course</h3>
-                <p class="text-sm text-gray-600 mt-2">Product Management Masterclass, you will learn with Sarah
-                    Johnson - Head of Product Customer Platform Gojek Indonesia</p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 
     <div class="flex justify-center items-center space-x-2 mt-12">

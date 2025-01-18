@@ -1,39 +1,28 @@
 <?php
 
 class Cours {
-    private int $id;
-    private string $titre;
-    private string $description;
-    private string $contenu;
-    private string $category;
-    private DateTime $created_at;
+    protected int $id;
+    protected string $titre;
+    protected string $description;
+    protected int $enseignant_id;
+    protected int $category_id = 1;
+    protected array $tags = [];
+    protected string $imageCouverture;
+    protected array $errors = [];
+    protected $connection;
+
+    public function __construct($pdo) {
+        $this->connection = $pdo;
+    }
 
     public function createCourse(){
-        // Create course logic
     }
 
-    public function updateCourse(int $course_id){
-        // Update course logic
-    }
-
-    public function deleteCourse(int $course_id){
-        // Delete course logic
-    }
-
-    public function getAllCourses(){
-        // Return all courses
-    }
-
-    public function getCourseDetail(int $course_id){
-        // Return details of a specific course
-    }
-
-    public function getCoursesByCategory(string $category_id) {
-        // Return courses by category
-    }
-
-    public function addTag(int $tag_id){
-        // Add tag to course logic
+    public function selectAllCourses(){
+        $query = "SELECT * FROM cours";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

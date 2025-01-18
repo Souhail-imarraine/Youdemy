@@ -15,7 +15,7 @@ class Utilisateur {
     {
         $this->pdo = $pdo;
     }
-
+    
     /***** ==== register ====  *****/
 
     public function register($name, $email, $password, $role){

@@ -2,18 +2,33 @@
 class Tag {
     private int $id;
     private string $name;
+    private $connexion;
+
+    public function __construct($pdo)
+    {
+        $this->connexion = $pdo;
+    }
 
     public function createTag(){
-        // Create tag logic
+
     }
 
     public function deleteTag(int $tag_id){
-        // Delete tag logic
+
     }
 
-    public function getAllTags(){
-        // Get all tags
+    public function getAllTags() {
+        $query = "SELECT * FROM tag;";
+    
+        $stmt = $this->connexion->prepare($query);
+    
+        $stmt->execute(); 
+    
+        $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $tags;
     }
+    
 }
 
 ?>

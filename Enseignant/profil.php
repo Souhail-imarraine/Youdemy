@@ -1,6 +1,5 @@
 <div class="container profil hidden p-6">
     <div class="bg-white rounded-xl shadow-sm p-8 mx-auto">
-        <!-- Header with Back Button -->
         <div class="flex items-center mb-8">
             <button class="flex items-center text-teal-700 hover:text-teal-800 mr-4" id="backToDashboard">
                 <i class="fas fa-arrow-left mr-2"></i>
@@ -9,9 +8,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Mon Profil</h2>
         </div>
 
-        <!-- Profile Header -->
         <div class="flex flex-col md:flex-row items-center md:items-start mb-8 pb-8 border-b border-gray-200">
-            <!-- Profile Picture Section -->
             <div class="relative mb-6 md:mb-0 md:mr-8">
                 <div class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden group relative">
                     <img src="https://via.placeholder.com/128" class="w-full h-full object-cover">

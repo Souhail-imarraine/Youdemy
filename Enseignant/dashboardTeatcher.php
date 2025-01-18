@@ -1,3 +1,17 @@
+<?php
+require_once '../action/create_cours.php';
+require_once '../classes/tags.php';
+require_once '../classes/Categorie.php';
+
+$tags = new Tag($pdo);
+$tagname = $tags->getAllTags();
+
+$category = new Categorie($pdo);
+$getAllCategorie = $category->getAllCategories();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,17 +32,14 @@
 <body class="bg-[#f0f7f7]">
     <div class="min-h-screen flex">
         <div class="w-64 bg-teal-800 text-white">
-            <!-- Logo -->
             <div class="p-4 flex items-center space-x-2">
                 <div class="w-10 h-10 bg-white/20 rounded-lg"></div>
                 <span class="text-xl font-semibold">YouDemy</span>
             </div>
 
-            <!-- Navigation -->
             <nav class="mt-8">
                 <div class="px-4 mb-3 text-sm text-gray-400 uppercase">Gestion des cours</div>
 
-                <!-- Dashboard -->
                 <a href="#" id="btnTablebord" class="flex items-center px-4 py-3 bg-teal-700 text-white">
                     <div class="w-5 h-5 rounded mr-3 flex items-center justify-center">
                         <i class="fas fa-gauge-high"></i>
@@ -36,7 +47,6 @@
                     Tableau de bord
                 </a>
 
-                <!-- My Courses -->
                 <a href="#" id="myCourses" class="flex items-center px-4 py-3 text-gray-300 hover:bg-teal-700">
                     <div class="w-5 h-5 rounded mr-3 flex items-center justify-center">
                         <i class="fas fa-book-open"></i>
@@ -44,7 +54,6 @@
                     Mes cours
                 </a>
 
-                <!-- Enrollments -->
                 <a href="#" id="inscription" class="flex items-center px-4 py-3 text-gray-300 hover:bg-teal-700">
                     <div class="w-5 h-5 rounded mr-3 flex items-center justify-center">
                         <i class="fas fa-users"></i>
@@ -52,7 +61,6 @@
                     Inscriptions
                 </a>
 
-                <!-- Statistics -->
                 <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover:bg-teal-700">
                     <div class="w-5 h-5 rounded mr-3 flex items-center justify-center">
                         <i class="fas fa-chart-line"></i>
@@ -97,8 +105,8 @@
                                     JD
                                 </div>
                                 <div class="text-left">
-                                    <p class="text-sm font-medium text-gray-700">John Doe</p>
-                                    <p class="text-xs text-gray-500">Enseignant</p>
+                                    <p class="text-sm font-medium text-gray-700"><?php echo $_SESSION['nom'] ?></p>
+                                    <p class="text-xs text-gray-500"><?php echo $_SESSION['role'] ?></p>
                                 </div>
                                 <div class="w-5 h-5 bg-gray-400 rounded"></div>
                             </button>
@@ -112,7 +120,8 @@
                                     Mon Profil
                                 </a>
                                 <hr class="my-2">
-                                <a href="#" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50">
+                                <a href="../logout.php"
+                                    class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50">
                                     <div class="w-5 h-5 bg-red-400 rounded mr-3"></div>
                                     Déconnexion
                                 </a>
@@ -202,7 +211,8 @@
                     <div class="bg-white p-6 rounded-xl shadow-sm">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-xl font-bold text-gray-800">Inscriptions récentes</h2>
-                            <button class="text-orange-500 hover:text-orange-600" id="VoirPlusInscription">Voir tout</button>
+                            <button class="text-orange-500 hover:text-orange-600" id="VoirPlusInscription">Voir
+                                tout</button>
                         </div>
 
                         <div class="space-y-4">
@@ -275,21 +285,21 @@
             containerDash.classList.remove('hidden');
         });
 
-        btnInscription.addEventListener('click', ()=> {
+        btnInscription.addEventListener('click', () => {
             hideAllContainers();
             containerInscription.classList.remove('hidden');
         });
 
-        btnMesCours.addEventListener('click', ()=> {
+        btnMesCours.addEventListener('click', () => {
             hideAllContainers();
             containerMyCourses.classList.remove('hidden');
         });
 
-        VoirPlusMesCourses.addEventListener('click', ()=> {
+        VoirPlusMesCourses.addEventListener('click', () => {
             hideAllContainers();
             containerMyCourses.classList.remove('hidden');
         });
-        VoirPlusInscription.addEventListener('click', ()=> {
+        VoirPlusInscription.addEventListener('click', () => {
             hideAllContainers();
             containerInscription.classList.remove('hidden');
         });

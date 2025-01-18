@@ -2,6 +2,10 @@
 class Categorie {
     public int $id;
     public string $name;
+    private $connexion;
+    public function __construct($pdo) {
+        $this->connexion = $pdo;
+    }
 
     public function createCategory(){
         // Create category logic
@@ -11,7 +15,10 @@ class Categorie {
         // Delete category logic
     }
 
-    public function getAllCategories(){
-        // Return all categories
+    public function getAllCategories() {
+            $query = "SELECT * FROM categorie";
+            $stmt = $this->connexion->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
