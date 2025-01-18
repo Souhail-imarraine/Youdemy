@@ -107,6 +107,21 @@ class Utilisateur {
        return $this->errors;
     }
 
+    public function SerchingCourses($searchValue) {
+        if(!empty($searchValue)){
+            $query = "SELECT * FROM cours WHERE titre LIKE :searchValue OR description LIKE :searchValue";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':searchValue' => '%' . $searchValue . '%']);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }else {
+            $query = "SELECT * FROM cours";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+    
+
     public function logout(){
         session_start();
         session_unset();

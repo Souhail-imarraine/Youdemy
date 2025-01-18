@@ -1,6 +1,7 @@
 <?php
 require_once './config/database.php';
 require_once './classes/cours.php';
+require_once './classes/utilisateur.php';
 
 $database = new Database();
 $pdo = $database->getConnection();
@@ -8,6 +9,13 @@ $pdo = $database->getConnection();
 $cours = new Cours($pdo);
 $getAllCourses = $cours->selectAllCourses();
 
+// Assuming Utilisateur is a class that contains the search method
+$utilisateur = new Utilisateur($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['ValueSearching'])) {
+    $searchTerm = trim($_GET['ValueSearching']);
+    $resultSerching = $utilisateur->SerchingCourses($searchTerm);
+}
 
 ?>
 <!DOCTYPE html>

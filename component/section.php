@@ -57,23 +57,65 @@
                 Design</button>
             <button class="px-6 py-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50">Program
                 Design</button>
+            <button class="px-6 py-2 bg-white border border-gray-200 rounded-full hover:bg-gray-50">Program
+                Design</button>
         </div>
 
-        <div class="w-full max-w-2xl relative">
-            <input type="text" placeholder="Search for courses..."
+        <form class="w-full max-w-2xl relative" method="get">
+            <input type="text" placeholder="Search for courses..." name="ValueSearching"
                 class="w-full px-6 py-3 pl-12 bg-white border border-gray-200 rounded-full focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700">
-            <div class="w-5 h-5 bg-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full"></div>
-        </div>
+            <!-- Search Button -->
+            <button type="submit" name="searching"
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal-700 text-white px-4 py-2 rounded-full hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                Search
+            </button>
+        </form>
+
+
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <?php if (!empty($resultSerching)): ?>
+            <?php foreach ($resultSerching as $Serching):?>
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+            <div
+                class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $Serching['Image_couverture']; ?>')] bg-cover bg-center">
+                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
+            </div>
+
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
+                    </div>
+                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
+                </div>
+                <p class="text-sm text-gray-500"><?php echo $Serching['date_creation'];?></p>
+                <h3 class="text-xl font-bold text-teal-700 mt-2"><?php echo $Serching['titre'];?></h3>
+                <p class="text-sm text-gray-600 mt-2"><?php echo $Serching['description'];?></p>
+                <div class="flex items-center justify-between mt-4">
+                    <div class="flex items-center">
+                        <span class="text-[#FF6B38] font-bold">$380</span>
+                        <span class="text-gray-400 line-through ml-2">$500</span>
+                    </div>
+                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
+                        Now</button>
+                </div>
+            </div>
+        </div>
+
+        <?php endforeach; ?>
+        <?php else:?>
         <?php foreach($getAllCourses as $cours): ?>
         <div class="bg-white rounded-xl overflow-hidden shadow-lg">
             <div
                 class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $cours['Image_couverture']; ?>')] bg-cover bg-center">
                 <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
             </div>
-            
+
             <div class="p-6">
                 <div class="flex items-center mb-4">
                     <div class="flex -space-x-2">
@@ -97,6 +139,7 @@
             </div>
         </div>
         <?php endforeach; ?>
+        <?php endif;?>
     </div>
 
     <div class="flex justify-center items-center space-x-2 mt-12">
