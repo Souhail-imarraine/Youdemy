@@ -50,7 +50,6 @@
                         </select>
                     </div>
                 </div>
-              
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Select Tags</label>
@@ -63,6 +62,18 @@
                                 value="<?php echo $tag['id']; ?>" class="hidden">
                         </label>
                         <?php endforeach; ?>
+                    </div>
+                </div>
+            
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">types</label>
+                        <select id="typeSelect" name="type"
+                            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:bg-white">
+                            <option value="">...</option>
+                            <option value="Video">Video</option>
+                            <option value="Document">Document</option>
+                        </select>
                     </div>
                 </div>
 
@@ -82,13 +93,27 @@
                             <input type="file" name="imageCouverture"
                                 class="text-teal-600 font-medium hover:text-teal-700 mt-4"
                                 accept="image/png, image/jpeg">
-                            <p class="text-sm text-gray-400 mt-1">PNG, JPG jusqu'à 5MB</p>
+                            <p class="text-sm text-gray-400 mt-1">PNG, JPG jusqu'à 1MB</p>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Vidéo promotionnelle</label>
+                <div class="hidden" id="document_container">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Document*</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
+                        <div class="text-center">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                            <p class="text-gray-500">Glissez-déposez une image ici ou</p>
+                            <input type="file" name="contenu_document"
+                                class="text-teal-600 font-medium hover:text-teal-700 mt-4"
+                                accept="image/png, image/jpeg">
+                            <p class="text-sm text-gray-400 mt-1">pdf, docs jusqu'à 5MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden" id="video_container">
+                    <label class=" blok text-sm font-medium text-gray-700 mb-2">Vidéo promotionnelle</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
                         <div class="text-center"> <i class="fas fa-film text-4xl text-gray-400 mb-3"></i>
                             <p class="text-gray-500">Ajoutez une vidéo de présentation de votre cours</p> <input
@@ -100,10 +125,6 @@
                 </div>
             </div>
             <div class="flex items-center justify-end space-x-4 pt-6">
-                <button type="button"
-                    class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
-                    Enregistrer comme brouillon
-                </button>
                 <button type="submit" name="creat_cours"
                     class="px-6 py-2.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 flex items-center">
                     <i class="fas fa-check mr-2"></i>
@@ -129,4 +150,21 @@ tags.forEach(tag => {
         }
     });
 });
+
+let typeSelect = document.querySelector('#typeSelect');
+let documentContainer = document.querySelector('#document_container');
+let videoContainer = document.querySelector('#video_container');
+
+typeSelect.addEventListener('change', function() {
+    videoContainer.classList.add('hidden');
+    documentContainer.classList.add('hidden');
+
+    if (this.value === 'Video') {
+        videoContainer.classList.remove('hidden');
+    } else if (this.value === 'Document') {
+        documentContainer.classList.remove('hidden');
+    }
+});
+
+
 </script>
