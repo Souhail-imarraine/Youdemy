@@ -2,12 +2,21 @@
 require_once '../action/create_cours.php';
 require_once '../classes/tags.php';
 require_once '../classes/Categorie.php';
+require_once '../classes/Enseignants.php';
+// require_once '../action/supprimerCours.php';
 
 $tags = new Tag($pdo);
 $tagname = $tags->getAllTags();
 
 $category = new Categorie($pdo);
 $getAllCategorie = $category->getAllCategories();
+
+$enseignant = new Enseignant($pdo);
+$CountCourses = $enseignant->getCourseCount($enseignant_id);
+
+$AfichageCourses = $enseignant->SelectAllCourse($enseignant_id);
+// print_r($AfichageCourses);
+
 
 ?>
 
@@ -140,8 +149,8 @@ $getAllCategorie = $category->getAllCategories();
                                 <div class="w-5 h-5 bg-teal-500 rounded"></div>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold text-gray-800">12</p>
-                        <p class="text-sm text-green-500 mt-2">+2 ce mois</p>
+                        <p class="text-2xl font-bold text-gray-800"><?= $CountCourses; ?></p>
+                        <!-- <p class="text-sm text-green-500 mt-2">+2 ce mois</p> -->
                     </div>
 
                     <div class="bg-white rounded-xl shadow-sm p-6">

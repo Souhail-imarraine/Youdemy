@@ -7,14 +7,14 @@
                 <p class="text-gray-500">Gérez vos cours et leurs inscriptions</p>
             </div>
             <div class="mt-4 md:mt-0">
-                <button class="px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-800 flex items-center" id="ajouterCourse">
+                <button class="px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-800 flex items-center"
+                    id="ajouterCourse">
                     <i class="fas fa-plus mr-2"></i>
                     Nouveau cours
                 </button>
             </div>
         </div>
 
-        <!-- Filters and Search -->
         <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                 <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
@@ -24,14 +24,12 @@
                             class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
                         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     </div>
-
-                    <!-- Status Filter -->
-                    <select class="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
+                    <!-- <select class="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
                         <option value="">Tous les statuts</option>
                         <option value="published">Publié</option>
                         <option value="draft">Brouillon</option>
                         <option value="review">En révision</option>
-                    </select>
+                    </select> -->
                 </div>
 
                 <!-- Export Button -->
@@ -51,9 +49,6 @@
                             Cours
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Statut
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Inscriptions
                         </th>
                         <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -63,23 +58,21 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     <!-- Course Row 1 -->
+                    <?php foreach($AfichageCourses as $affCours): ?>
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0">
-                                    <img src="course1.jpg" alt="" class="w-full h-full rounded-lg object-cover">
+                                    <img src="<?= $affCours['Image_couverture'];?>" alt=""
+                                        class="w-full h-full rounded-lg object-cover">
                                 </div>
                                 <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Développement Web Avancé</div>
-                                    <div class="text-sm text-gray-500">Frontend • 24 leçons</div>
+                                    <div class="text-sm font-medium text-gray-900"><?= $affCours['titre'];?></div>
+                                    <div class="text-sm text-gray-500"><?= $affCours['description'];?></div>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                                Publié
-                            </span>
-                        </td>
+
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="text-sm text-gray-900">128 étudiants</div>
@@ -88,58 +81,20 @@
                                 </button>
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right space-x-3">
-                            <button class="text-teal-600 hover:text-teal-900" title="Voir les détails">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="text-blue-600 hover:text-blue-900" title="Modifier">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-600 hover:text-red-900" title="Supprimer">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Course Row 2 -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0">
-                                    <img src="course2.jpg" alt="" class="w-full h-full rounded-lg object-cover">
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">React Masterclass</div>
-                                    <div class="text-sm text-gray-500">JavaScript • 32 leçons</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                                En révision
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-900">85 étudiants</div>
-                                <button class="ml-2 text-teal-600 hover:text-teal-800" title="Voir les inscriptions">
-                                    <i class="fas fa-users"></i>
-                                </button>
-                            </div>
-                        </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-3">
-                            <button class="text-teal-600 hover:text-teal-900" title="Voir les détails">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="text-blue-600 hover:text-blue-900" title="Modifier">
+                            <a href="../ajouterCourse.php?id_cours=<?= $affCours['id'] ?>"
+                                class="text-blue-600 hover:text-blue-900">
                                 <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-600 hover:text-red-900" title="Supprimer">
+                            </a>
+
+                            <a href="../action/supprimerCours.php?id_cours=<?= $affCours['id'] ?>"
+                                class="text-red-400 hover:text-red-300">
                                 <i class="fas fa-trash"></i>
-                            </button>
+                            </a>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 

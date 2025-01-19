@@ -18,6 +18,14 @@ class Cours {
     public function createCourse(){
     }
 
+    public function deleteCours($cours_id){
+        $query = "DELETE FROM cours WHERE id = :cours_id ";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute([':cours_id' => $cours_id]);
+        return true;
+    }
+
+
     public function selectAllCourses(){
         $query = "SELECT * FROM cours";
         $stmt = $this->connection->prepare($query);
