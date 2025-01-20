@@ -6,6 +6,7 @@ $database = new Database();
 $pdo = $database->getConnection();
 
 $administrateur = new Administrateur($pdo);
+
 $totalCours = $administrateur->getTotalCours();
 
 $totalEnseignants = $administrateur->getTotalEnseignants();
@@ -19,6 +20,8 @@ $getTop3Enseignants = $administrateur->getTop3Enseignants();
 $getAllTeachers = $administrateur->getAllTeachers();
 
 $TotalCountTeachers = $administrateur->TotalCountTeachers();
+
+$getAllEtudiant = $administrateur->getAllEtudiant();
 
 print_r($getCoursesByCategory);
 

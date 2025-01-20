@@ -13,7 +13,17 @@ class Administrateur extends Utilisateur {
     }
 
     public function getAllEtudiant(){
+        $query = "SELECT u.nom, u.email, u.status, COUNT(c.id) AS total_cours_Inscription
+                FROM utilisateur u 
+                LEFT JOIN inscriptioncours inc ON u.id = inc.etudiant_id 
+                LEFT JOIN cours c ON inc.cours_id = c.id 
+                WHERE u.role = 'Etudiant'
+                GROUP BY u.id
+                ORDER BY total_cours_Inscription DESC;";
 
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteEtudiant($student_id){
@@ -110,11 +120,9 @@ class Administrateur extends Utilisateur {
     $stmt = $this->connexion->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+}   
 
-    
-    
-    
+
 }
 
 ?>

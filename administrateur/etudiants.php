@@ -5,52 +5,6 @@
                 <h1 class="text-2xl font-bold text-gray-900">Gestion des Étudiants</h1>
                 <p class="text-gray-500 mt-1">Gérez et surveillez tous les étudiants de la plateforme</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user-graduate text-xl text-teal-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Total Étudiants</p>
-                                <h3 class="text-xl font-bold text-gray-900">2,547</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user-check text-xl text-green-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Étudiants Actifs</p>
-                                <h3 class="text-xl font-bold text-gray-900">2,180</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user-plus text-xl text-blue-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Nouveaux ce mois</p>
-                                <h3 class="text-xl font-bold text-gray-900">367</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="bg-white rounded-xl shadow-sm">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
@@ -84,12 +38,6 @@
                                     Cours Inscrits
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Progression
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Dernière Activité
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Statut
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -98,6 +46,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
+                            <?php foreach($getAllEtudiant as $etudiants): ?>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -108,30 +57,20 @@
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                                Sophie Martin
+                                                <?= $etudiants['nom']; ?>
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                                sophie.martin@example.com
+                                            <?= $etudiants['email']; ?>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">5 cours</div>
-                                    <div class="text-xs text-gray-500">3 en cours, 2 complétés</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-teal-600 h-2.5 rounded-full" style="width: 75%"></div>
-                                    </div>
-                                    <div class="text-xs text-gray-500 mt-1">75% complété</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    Il y a 2 heures
+                                    <div class="text-sm text-gray-900"><?= $etudiants['total_cours_Inscription']; ?></div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Actif
+                                    <?= $etudiants['status']; ?>
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -139,15 +78,13 @@
                                         <button class="text-teal-600 hover:text-teal-900" title="Voir le profil">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="text-blue-600 hover:text-blue-900" title="Modifier">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
                                         <button class="text-red-600 hover:text-red-900" title="Désactiver">
                                             <i class="fas fa-ban"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
