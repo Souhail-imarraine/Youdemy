@@ -1,11 +1,13 @@
 <?php
 require_once '../config/database.php';
 require_once '../classes/Administrateur.php';
+require_once '../classes/Categorie.php';
 
 $database = new Database();
 $pdo = $database->getConnection();
 
 $administrateur = new Administrateur($pdo);
+$categories = new Categorie($pdo,'','');
 
 $totalCours = $administrateur->getTotalCours();
 
@@ -27,7 +29,15 @@ $getCoursesWithTeachersAndCategories = $administrateur->getCoursesWithTeachersAn
 
 $getAllCategories = $administrateur->getAllCategories();
 
-// print_r($getCoursesByCategory);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
+    $categoryName = trim($_POST['categoryName']);
+    if (!empty($categoryName)) {
+        if ($categories->createCategory($categoryName)) {
+            header("Location: index.php");
+            exit();
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -388,7 +398,8 @@ $getAllCategories = $administrateur->getAllCategories();
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
                                 <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                                    <img src="../Enseignant/<?= $getCourseWithMostStudents['image_cours']; ?>" alt="Icon" class="w-6 h-6">
+                                    <img src="../Enseignant/<?= $getCourseWithMostStudents['image_cours']; ?>"
+                                        alt="Icon" class="w-6 h-6">
                                 </div>
 
                                 <div>
@@ -411,24 +422,25 @@ $getAllCategories = $administrateur->getAllCategories();
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">Top 3 Enseignants</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <?php foreach ($getTop3Enseignants as $enseignant): ?>
-                            <div class="flex flex-col p-4 bg-gray-50 rounded-lg">
-                                <div class="flex items-center space-x-3 mb-3">
-                                    <div class="h-12 w-12 rounded-full bg-teal-100 flex items-center justify-center">
-                                        <i class="fas fa-user text-xl text-teal-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium text-gray-900"><?= $enseignant['enseignant_nom']?></p>
-                                        <div class="flex items-center text-sm text-gray-500">
-                                            <i class="fas fa-star text-yellow-400"></i>
-                                        </div>
-                                    </div>
+                        <div class="flex flex-col p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="h-12 w-12 rounded-full bg-teal-100 flex items-center justify-center">
+                                    <i class="fas fa-user text-xl text-teal-600"></i>
                                 </div>
-                                <div class="mt-auto">
-                                    <div class="flex justify-between items-center text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i><?= $enseignant['total_etudiants'] ?> étudiants</span>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900"><?= $enseignant['enseignant_nom']?></p>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-star text-yellow-400"></i>
                                     </div>
                                 </div>
                             </div>
+                            <div class="mt-auto">
+                                <div class="flex justify-between items-center text-sm text-gray-500">
+                                    <span><i class="fas fa-users mr-1"></i><?= $enseignant['total_etudiants'] ?>
+                                        étudiants</span>
+                                </div>
+                            </div>
+                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>

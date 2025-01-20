@@ -10,15 +10,48 @@
                         </div>
                         <div class="flex space-x-3">
                             <div class="relative">
-                                <input type="text" placeholder="Rechercher une catégorie..." 
-                                       class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                <input type="text" placeholder="Rechercher une catégorie..."
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="fas fa-search text-gray-400"></i>
                                 </div>
                             </div>
-                            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                            <button id="openModalBtn" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                                 <i class="fas fa-plus mr-2"></i>Ajouter
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div id="categoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+                    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                        <div class="mt-3">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">Ajouter une catégorie</h3>
+                                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="mt-4">
+                                <form action="" method="POST" class="space-y-4">
+                                    <div>
+                                        <label for="categoryName" class="block text-sm font-medium text-gray-700">Nom de la catégorie</label>
+                                        <input type="text" name="categoryName" id="categoryName" 
+                                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                                    </div>
+                                    <div class="flex justify-end space-x-3">
+                                        <button type="button" id="cancelBtn"
+                                                class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                            Annuler
+                                        </button>
+                                        <button type="submit"
+                                                class="px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700">
+                                            Ajouter
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,41 +109,41 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex-1 flex justify-between sm:hidden">
-                            <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Précédent
-                            </button>
-                            <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Suivant
-                            </button>
-                        </div>
-                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                            <div>
-                                <p class="text-sm text-gray-700">
-                                    Affichage de <span class="font-medium">1</span> à <span class="font-medium">10</span> sur <span class="font-medium">12</span> résultats
-                                </p>
-                            </div>
-                            <div>
-                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                    <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                        <span class="sr-only">Précédent</span>
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</button>
-                                    <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-purple-50 text-sm font-medium text-purple-600">2</button>
-                                    <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                        <span class="sr-only">Suivant</span>
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('categoryModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        // Open modal
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        // Close modal functions
+        const closeModal = () => {
+            modal.classList.add('hidden');
+        };
+
+        // Close modal events
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Prevent modal close when clicking inside modal content
+        modal.querySelector('.relative').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
 </main>

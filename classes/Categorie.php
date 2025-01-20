@@ -1,18 +1,24 @@
 <?php
 class Categorie {
-    public int $id;
-    public string $name;
+    private  $id;
+    private string $name;
     private $connexion;
-    public function __construct($pdo) {
+
+    public function __construct($pdo, $id, $name) {
+        $this->id = $id ;
+        $this->name = $name;
         $this->connexion = $pdo;
     }
 
-    public function createCategory(){
-        
+    public function createCategory(string $value_Categorie){
+        $query = "INSERT INTO categorie (name) VALUES (:name)";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute([':name' => $value_Categorie]);
+        return true ;
     }
 
-    public function deleteCategory(int $category_id){
-        // Delete category logic
+    public function deleteCategory(int $id){
+
     }
 
     public function getAllCategories() {
@@ -21,4 +27,6 @@ class Categorie {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+
 }
