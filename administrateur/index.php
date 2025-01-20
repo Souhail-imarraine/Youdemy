@@ -25,7 +25,9 @@ $getAllEtudiant = $administrateur->getAllEtudiant();
 
 $getCoursesWithTeachersAndCategories = $administrateur->getCoursesWithTeachersAndCategories();
 
-print_r($getCoursesByCategory);
+$getAllCategories = $administrateur->getAllCategories();
+
+// print_r($getCoursesByCategory);
 
 ?>
 <!DOCTYPE html>

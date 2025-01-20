@@ -90,6 +90,7 @@ class Administrateur extends Utilisateur {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public function getCourseWithMostStudents() {
             $query = "SELECT c.id, c.titre, c.Image_couverture AS image_cours, COUNT(ic.etudiant_id) AS total_etudiants 
@@ -145,6 +146,12 @@ public function getCoursesWithTeachersAndCategories() {
 
 
 
+public function getAllCategories() {
+    $query = "SELECT * FROM categorie";
+    $stmt = $this->connexion->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }
 

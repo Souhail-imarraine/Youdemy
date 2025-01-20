@@ -8,6 +8,7 @@ class Categorie {
     }
 
     public function createCategory(){
+        
     }
 
     public function deleteCategory(int $category_id){
