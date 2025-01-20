@@ -23,6 +23,8 @@ $TotalCountTeachers = $administrateur->TotalCountTeachers();
 
 $getAllEtudiant = $administrateur->getAllEtudiant();
 
+$getCoursesWithTeachersAndCategories = $administrateur->getCoursesWithTeachersAndCategories();
+
 print_r($getCoursesByCategory);
 
 ?>

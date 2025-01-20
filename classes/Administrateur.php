@@ -122,6 +122,29 @@ class Administrateur extends Utilisateur {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }   
 
+public function getCoursesWithTeachersAndCategories() {
+    $query = "SELECT 
+            c.Image_couverture AS image, 
+            c.id, 
+            c.titre, 
+            u.nom, 
+            ca.name AS categories
+        FROM cours c
+        INNER JOIN utilisateur u ON u.id = c.enseignant_id
+        INNER JOIN categorie ca ON c.categorie_id = ca.id
+        WHERE u.role = 'Enseignant'
+        GROUP BY c.id, c.titre
+        ORDER BY u.date_creation DESC
+    ";
+
+    $stmt = $this->connexion->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 
 }
 

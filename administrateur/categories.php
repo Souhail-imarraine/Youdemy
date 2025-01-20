@@ -1,55 +1,6 @@
 <main class="flex-1 p-4 md:p-8 mt-16 md:ml-64 transition-all duration-300">
     <div class="container categories hidden">
         <div class="mb-6">
-            <div class="mb-8">
-                <h1 class="text-2xl font-bold text-gray-900">Gestion des Catégories</h1>
-                <p class="text-gray-500 mt-1">Gérez les catégories de cours de la plateforme</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-folder text-xl text-purple-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Total Catégories</p>
-                                <h3 class="text-xl font-bold text-gray-900">12</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-check-circle text-xl text-green-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Catégories Actives</p>
-                                <h3 class="text-xl font-bold text-gray-900">10</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-book text-xl text-blue-600"></i>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm text-gray-500">Total Cours</p>
-                                <h3 class="text-xl font-bold text-gray-900">156</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="bg-white rounded-xl shadow-sm">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
@@ -77,31 +28,28 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Catégorie
+                                    id
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Description
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nombre de Cours
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Statut
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions
+                                    Nom categorie
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr class="hover:bg-gray-50">
+
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10">
-                                            <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                                <i class="fas fa-code text-purple-600"></i>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                1
                                             </div>
                                         </div>
+                                    </div>
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
                                                 Développement Web
@@ -109,18 +57,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">Apprenez le développement web moderne</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">45</div>
-                                    <div class="text-xs text-gray-500">Cours</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Active
-                                    </span>
-                                </td>
+                                
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex justify-end space-x-3">
                                         <button class="text-purple-600 hover:text-purple-900" title="Voir les cours">
