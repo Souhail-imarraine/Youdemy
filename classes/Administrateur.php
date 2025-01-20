@@ -153,6 +153,14 @@ public function getAllCategories() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+public function securiterSession(){
+    session_start();
+    if(!isset($_SESSION) && $_SESSION['is_login'] != true ||  $_SESSION['role'] != 'Administrateur'){
+        header('Location: ../signin.php');
+        die();
+    }
+}
+
 }
 
 ?>

@@ -2,12 +2,16 @@
 require_once '../config/database.php';
 require_once '../classes/Administrateur.php';
 require_once '../classes/Categorie.php';
+require_once '../classes/tags.php';
 
 $database = new Database();
 $pdo = $database->getConnection();
 
 $administrateur = new Administrateur($pdo);
-$categories = new Categorie($pdo,'','');
+
+$session = $administrateur->securiterSession();
+
+$categories = new Categorie($pdo);
 
 $totalCours = $administrateur->getTotalCours();
 
@@ -187,7 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
 
                                     <hr class="my-2 border-gray-200">
 
-                                    <a href="#"
+                                    <a href="../logout.php"
                                         class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150">
                                         <i class="fas fa-sign-out-alt text-red-400 w-5 h-5 mr-3"></i>
                                         <span>Déconnexion</span>
@@ -314,6 +318,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
                             class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 sidebar-link">
                             <i class="fas fa-sitemap mr-3 text-gray-400"></i>
                             Catégories
+                        </a>
+                        <a href="#" id="btnTags"
+                            class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 sidebar-link">
+                            <i class="fas fa-tags mr-3 text-gray-400"></i>
+                            Tags
                         </a>
                     </div>
                 </div>
@@ -450,6 +459,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
         <?php require_once 'etudiants.php' ?>
         <?php require_once 'enseignant.php' ?>
         <?php require_once 'categories.php' ?>
+        <?php require_once 'gerieTags.php' ?>
     </div>
 
     <script>
@@ -459,6 +469,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
     const btnEtudiants = document.querySelector('#btnEtudiants');
     const btnCours = document.querySelector('#btnCours');
     const btnCategories = document.querySelector('#btnCategories');
+    const btnTags = document.querySelector('#btnTags');
 
     let containers = document.querySelectorAll('.container');
     const containerDash = document.querySelector('.container.dashboard');
@@ -466,6 +477,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
     const containerEnseignant = document.querySelector('.container.enseignant');
     const containerCours = document.querySelector('.container.cours');
     const containerCategories = document.querySelector('.container.categories');
+    const containerTags = document.querySelector('.container.tags');
 
     function hideAllContainers() {
         containers.forEach(container => {
@@ -534,6 +546,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
         hideAllContainers();
         containerCategories.classList.remove('hidden');
         updateSidebarActive(btnCategories);
+    });
+
+    btnTags.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideAllContainers();
+        containerTags.classList.remove('hidden');
+        updateSidebarActive(btnTags);
     });
 
     const menuButton = document.querySelector('[aria-label="Ouvrir le menu"]');

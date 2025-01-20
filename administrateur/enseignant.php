@@ -85,11 +85,11 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <button class="text-teal-600 hover:text-teal-900">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
                                     <button class="text-red-600 hover:text-red-900">
                                         <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-900" title="Désactiver">
+                                        <i class="fas fa-ban"></i>
                                     </button>
                                 </div>
                             </td>

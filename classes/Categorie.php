@@ -4,9 +4,7 @@ class Categorie {
     private string $name;
     private $connexion;
 
-    public function __construct($pdo, $id, $name) {
-        $this->id = $id ;
-        $this->name = $name;
+    public function __construct($pdo) {
         $this->connexion = $pdo;
     }
 

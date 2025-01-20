@@ -12,14 +12,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CreateAcount'])){
     $password = htmlspecialchars($_POST['password']);
     $role = $_POST['role'];
     $register = $utilisateur->register($name, $email, $password, $role);
-    if($register && $role == 'Etudiant'){
-        // header('Location: students/interface.php');
-        header('Location: signin.php');
-    }elseif($register && $role == 'Enseignant') {
-        // header('Location: Enseignant/dashboardTeatcher.php');
+    if($register){
         header('Location: signin.php');
     }else{
         $errors = $utilisateur->getErrors();
-        exit();
     }
 }
