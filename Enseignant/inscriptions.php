@@ -20,11 +20,6 @@
                                     <option value="data">Science des Données</option>
                                 </select>
                             </div>
-                            <button
-                                class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center">
-                                <i class="fas fa-download mr-2"></i>
-                                Exporter
-                            </button>
                         </div>
                     </div>
 
@@ -73,46 +68,6 @@
                                         <div class="text-xs text-gray-500">14:30</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-teal-600 hover:text-teal-900 mr-3">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                            <i class="fas fa-envelope"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <!-- Student Row 2 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0">
-                                                <img src="student2.jpg" alt="" class="w-full h-full rounded-full">
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Marie Martin</div>
-                                                <div class="text-sm text-gray-500">marie.martin@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">React Avancé</div>
-                                        <div class="text-xs text-gray-500">JavaScript</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">14 Mars 2024</div>
-                                        <div class="text-xs text-gray-500">09:15</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-teal-600 hover:text-teal-900 mr-3">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-blue-600 hover:text-blue-900 mr-3">
-                                            <i class="fas fa-envelope"></i>
-                                        </button>
                                         <button class="text-red-600 hover:text-red-900">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -120,31 +75,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <!-- Pagination -->
-                        <div class="px-6 py-4 border-t border-gray-200">
-                            <div class="flex items-center justify-between">
-                                <div class="text-sm text-gray-500">
-                                    Affichage de 1 à 10 sur 100 étudiants
-                                </div>
-                                <nav class="flex items-center space-x-2">
-                                    <button
-                                        class="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button
-                                        class="px-4 py-2 rounded-lg border border-gray-200 bg-teal-50 text-teal-700 font-medium">1</button>
-                                    <button
-                                        class="px-4 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">2</button>
-                                    <button
-                                        class="px-4 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">3</button>
-                                    <button
-                                        class="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </nav>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

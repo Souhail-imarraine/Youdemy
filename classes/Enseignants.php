@@ -15,6 +15,7 @@ class Enseignant extends Utilisateur {
         $stmt->execute([':enseignant_id' => $enseignant_id]);
         return $stmt->fetchColumn();
     }
+
     public function SelectAllCourse($enseignant_id) {
         $query = "SELECT * FROM cours WHERE enseignant_id = :enseignant_id";
         $stmt = $this->pdo->prepare($query);
@@ -22,15 +23,33 @@ class Enseignant extends Utilisateur {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getCourseEnrollments(int $course_id){
-        
+    public function getCourseEnrollments($user_id) {
+        $query = "SELECT 
+            u.nom AS enseignant_name,
+            COUNT(inc.id) AS total_inscriptions
+            FROM 
+                inscriptioncours inc
+            LEFT JOIN 
+                cours c 
+            ON 
+                inc.cours_id = c.id
+            LEFT JOIN 
+                utilisateur u 
+            ON 
+                c.enseignant_id = u.id
+            WHERE 
+                u.role = 'Enseignant' && u.id = :enseignant_id
+            GROUP BY 
+                u.id;
+            ";
+            
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':enseignant_id'=> $user_id]);
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $results;
     }
 
-
-    public function getMyStatistics(){
-
     }
-}
 
 
 ?>

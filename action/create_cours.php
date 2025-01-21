@@ -23,7 +23,6 @@ if (!$enseignant_id) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['creat_cours'])) {
   
-    // Sanitize input fields
     $titre = htmlspecialchars($_POST['titre']);
     $description = htmlspecialchars($_POST['description']);
     $category_id = htmlspecialchars($_POST['category']);

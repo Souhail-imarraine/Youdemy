@@ -27,7 +27,7 @@ class CoursDocument extends Cours {
         ]);
 
         $course_id = $this->connection->lastInsertId();
-
+        
         foreach ($this->tags as $tag) {
             $query = "INSERT INTO cours_tag (cours_id, tag_id) VALUES (:course_id, :tag_id)";
             $stmt = $this->connection->prepare($query);

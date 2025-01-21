@@ -75,9 +75,6 @@ class Administrateur extends Utilisateur {
     }
     
 
-    public function manageContent(){
-    }
-
     public function getTotalCours() {
         $query = "SELECT COUNT(*) AS total_cours FROM cours";
         $stmt = $this->connexion->prepare($query);

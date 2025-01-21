@@ -15,7 +15,8 @@ $enseignant = new Enseignant($pdo);
 $CountCourses = $enseignant->getCourseCount($enseignant_id);
 
 $AfichageCourses = $enseignant->SelectAllCourse($enseignant_id);
-// print_r($AfichageCourses);
+
+$totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
 
 
 ?>
@@ -141,7 +142,7 @@ $AfichageCourses = $enseignant->SelectAllCourse($enseignant_id);
             </header>
 
             <div class="container dashboard p-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-gray-500">Total des cours</h3>
@@ -160,19 +161,8 @@ $AfichageCourses = $enseignant->SelectAllCourse($enseignant_id);
                             </div>
                             <span class="text-sm text-green-500">+12% ce mois</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800">1,234</h3>
+                        <h3 class="text-2xl font-bold text-gray-800"><?= $totalInscrire['total_inscriptions'] ?></h3>
                         <p class="text-gray-500">Étudiants inscrits</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500">Taux de complétion</h3>
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                                <div class="w-5 h-5 bg-green-500 rounded"></div>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold text-gray-800">78%</p>
-                        <p class="text-sm text-green-500 mt-2">+5% ce mois</p>
                     </div>
                 </div>
                 <!-- Course Management and Statistics -->

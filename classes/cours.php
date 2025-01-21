@@ -5,7 +5,7 @@ class Cours {
     protected string $titre;
     protected string $description;
     protected int $enseignant_id;
-    protected int $category_id = 1;
+    protected int $category_id;
     protected array $tags = [];
     protected string $imageCouverture;
     protected array $errors = [];
@@ -14,8 +14,9 @@ class Cours {
     public function __construct($pdo) {
         $this->connection = $pdo;
     }
-
+    
     public function createCourse(){
+
     }
 
     public function deleteCours($cours_id){
