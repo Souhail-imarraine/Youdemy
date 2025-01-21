@@ -15,8 +15,11 @@ class Categorie {
         return true ;
     }
 
-    public function deleteCategory(int $id){
-
+    public function deleteCategory($id_categorie){
+        $query = "DELETE FROM categorie WHERE id = :id_categorie;";
+        $stmt = $this->connexion->prepare($query);        
+        $stmt->execute([':id_categorie' => $id_categorie]);
+        return true;
     }
 
     public function getAllCategories() {

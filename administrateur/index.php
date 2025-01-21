@@ -83,6 +83,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Unban'])){
         header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
     }
 }
+
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteEneignant'])){
     $enseignant_id = $_POST['enseignant_id'];
 
@@ -91,6 +92,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteEneignant'])){
         header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
     }
 }
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteCategorie'])){
+    $id_categorie = $_POST['categorie_id'];
+    $deleteCategorie = $categories->deleteCategory($id_categorie);
+    if($deleteCategorie){
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
