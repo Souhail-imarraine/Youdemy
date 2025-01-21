@@ -9,11 +9,35 @@ class Tag {
         $this->connexion = $pdo;
     }
 
-    public function createTag($name_tags){
-        $query = 'INSERT INTO tag (nom) VALUES (:nom)';
-        $stmt = $this->connexion->prepare($query); 
-        $stmt->execute([':nom' => $name_tags]);
-        return true;
+    public function createTag($name_tags) {
+        try {
+            if (empty($name_tags)) {
+                return ["success" => false, "message" => "Le nom du tag ne peut pas être vide."];
+            }
+            
+            $name_tags = trim($name_tags);
+            
+            $check_query = "SELECT COUNT(*) as count FROM tag WHERE nom = :nom";
+            $check_stmt = $this->connexion->prepare($check_query);
+            $check_stmt->execute([':nom' => $name_tags]);
+            $result = $check_stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result['count'] > 0) {
+                return ["success" => false, "message" => "Ce tag existe déjà."];
+            }
+            
+            $query = 'INSERT INTO tag (nom) VALUES (:nom)';
+            $stmt = $this->connexion->prepare($query);
+            $success = $stmt->execute([':nom' => $name_tags]);
+            
+            if ($success) {
+                return ["success" => true];
+            } else {
+                return ["success" => false, "message" => "Erreur lors de la création du tag."];
+            }
+        } catch (PDOException $e) {
+            return ["success" => false, "message" => "Erreur de base de données: " . $e->getMessage()];
+        }
     }
 
     public function deleteTag(int $tag_id) {

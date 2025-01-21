@@ -24,19 +24,7 @@
                             class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
                         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     </div>
-                    <!-- <select class="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500">
-                        <option value="">Tous les statuts</option>
-                        <option value="published">Publié</option>
-                        <option value="draft">Brouillon</option>
-                        <option value="review">En révision</option>
-                    </select> -->
                 </div>
-
-                <!-- Export Button -->
-                <button class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center">
-                    <i class="fas fa-download mr-2"></i>
-                    Exporter
-                </button>
             </div>
         </div>
 
@@ -83,46 +71,33 @@
                         </td>
 
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-3">
-                            <a href="edit.php?id_cours=<?= $affCours['id'] ?>" class="text-blue-600 hover:text-blue-900" id="edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                            <form action="" method="post">
+                                <a href="edit.php?id_cours=<?= $affCours['id'] ?>"
+                                    class="text-blue-600 hover:text-blue-900" id="edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
 
-                            <a href="../action/supprimerCours.php?id_cours=<?= $affCours['id'] ?>"
-                                class="text-red-400 hover:text-red-300">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <a href="../action/supprimerCours.php?id_cours=<?= $affCours['id'] ?>"class="text-red-400 hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </form>
                         </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
 
-            <!-- Pagination -->
             <div class="px-6 py-4 border-t border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="text-sm text-gray-500">
                         Affichage de 1 à 10 sur 25 cours
                     </div>
-                    <nav class="flex items-center space-x-2">
-                        <button class="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button
-                            class="px-4 py-2 rounded-lg border border-gray-200 bg-teal-50 text-teal-700 font-medium">1</button>
-                        <button
-                            class="px-4 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">2</button>
-                        <button
-                            class="px-4 py-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">3</button>
-                        <button class="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </nav>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
     <div class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center" id="deleteModal">
         <div class="bg-white rounded-lg p-6 max-w-sm mx-auto">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Confirmer la suppression</h3>
@@ -207,7 +182,7 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-            
+
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">types</label>
@@ -242,8 +217,8 @@
                 </div>
 
                 <div class="hidden" id="document_container">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Document*</label>
-                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Document*</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
                         <div class="text-center">
                             <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
                             <p class="text-gray-500">Glissez-déposez une image ici ou</p>
@@ -311,10 +286,9 @@ typeSelect.addEventListener('change', function() {
 
 let btnedit = document.getElementById('#edit');
 let containerEdit = document.getElementById('#editContainer');
-btnedit.addEventListener('click', ()=> {
+btnedit.addEventListener('click', () => {
     containerEdit.classList.remove('hidden');
 
-    
-})
 
+})
 </script>

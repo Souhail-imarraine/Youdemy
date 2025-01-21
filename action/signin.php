@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signin'])){
     $signin = $utilisateur->login($email, $password);
 
     if ($signin && $_SESSION['role'] == 'Etudiant') {
-        header('Location: students/interface.php');
+        header('Location: index.php');
         exit();
     } elseif ($signin && $_SESSION['role'] == 'Enseignant') {
         header('Location: Enseignant/dashboardTeatcher.php');

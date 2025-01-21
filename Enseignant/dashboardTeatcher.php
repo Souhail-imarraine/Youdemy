@@ -107,7 +107,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
 
                         </button>
 
-                        <!-- Profile Dropdown -->
                         <div class="relative group">
                             <button class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100">
                                 <div
@@ -121,7 +120,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
                                 <div class="w-5 h-5 bg-gray-400 rounded"></div>
                             </button>
 
-                            <!-- Dropdown Menu -->
                             <div
                                 class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block">
                                 <a href="#"
@@ -151,7 +149,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
                             </div>
                         </div>
                         <p class="text-2xl font-bold text-gray-800"><?= $CountCourses; ?></p>
-                        <!-- <p class="text-sm text-green-500 mt-2">+2 ce mois</p> -->
                     </div>
 
                     <div class="bg-white rounded-xl shadow-sm p-6">
@@ -161,13 +158,11 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
                             </div>
                             <span class="text-sm text-green-500">+12% ce mois</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800"><?= $totalInscrire['total_inscriptions'] ?></h3>
+                        <h3 class="text-2xl font-bold text-gray-800"><?= $totalInscrire['total_inscriptions'] ?? '0';?></h3>
                         <p class="text-gray-500">Étudiants inscrits</p>
                     </div>
                 </div>
-                <!-- Course Management and Statistics -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Course List -->
                     <div class="bg-white p-6 rounded-xl shadow-sm">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-xl font-bold text-gray-800">Mes cours récents</h2>
@@ -175,7 +170,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
                         </div>
 
                         <div class="space-y-4">
-                            <!-- Course Item -->
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center flex-1">
                                     <div class="w-12 h-12 bg-gray-200 rounded-lg mr-4"></div>
@@ -190,7 +184,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
                                 </div>
                             </div>
 
-                            <!-- Additional Course Items -->
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                 <div class="flex items-center flex-1">
                                     <div class="w-12 h-12 bg-gray-200 rounded-lg mr-4"></div>
@@ -246,7 +239,6 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
             <?php require_once 'inscriptions.php' ?>
         </div>
         <script>
-        // Select buttons
         let Btnprofil = document.querySelector('.Btnprofil');
         let btnajouterCourses = document.querySelector('#ajouterCourse');
         let btnTablebord = document.querySelector('#btnTablebord');

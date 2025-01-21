@@ -11,7 +11,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CreateAcount'])){
     $email = htmlspecialchars($_POST['email']);
     $password = htmlspecialchars($_POST['password']);
     $role = $_POST['role'];
-    $register = $utilisateur->register($name, $email, $password, $role);
+
+    if($role == 'Enseignant'){
+        $status = 'pending';
+    }elseif($role == 'Etudiant'){
+        $status = 'Active';
+    }else {
+        $status = 'Active';
+    }
+    $register = $utilisateur->register($name, $email, $password, $role, $status);
     if($register){
         header('Location: signin.php');
     }else{

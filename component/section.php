@@ -64,118 +64,115 @@
         <form class="w-full max-w-2xl relative" method="get">
             <input type="text" placeholder="Search for courses..." name="ValueSearching"
                 class="w-full px-6 py-3 pl-12 bg-white border border-gray-200 rounded-full focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700">
-            <!-- Search Button -->
             <button type="submit" name="searching"
                 class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-teal-700 text-white px-4 py-2 rounded-full hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
                 Search
             </button>
         </form>
-
-
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <?php
+        $items_per_page = 8;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $items_per_page;
+        
+        if (isset($_GET['ValueSearching'])) {
+            $searchTerm = trim($_GET['ValueSearching']);
+            
+            $count_query = $pdo->prepare("SELECT COUNT(*) as total FROM cours WHERE titre LIKE :search OR description LIKE :search");
+            $count_query->execute([':search' => "%$searchTerm%"]);
+            $total_courses = $count_query->fetch(PDO::FETCH_ASSOC)['total'];
+            
+            $query = "SELECT * FROM cours WHERE titre LIKE :search OR description LIKE :search LIMIT :limit OFFSET :offset";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':search', "%$searchTerm%", PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $total_query = $pdo->query("SELECT COUNT(*) as total FROM cours");
+            $total_courses = $total_query->fetch(PDO::FETCH_ASSOC)['total'];
+            
+            $query = "SELECT * FROM cours LIMIT :limit OFFSET :offset";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        $total_pages = ceil($total_courses / $items_per_page);
+        ?>
 
-        <?php if (!empty($resultSerching)): ?>
-            <?php foreach ($resultSerching as $Serching):?>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div
-                class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $Serching['Image_couverture']; ?>')] bg-cover bg-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
+        <?php if (count($courses) > 0): ?>
+            <?php foreach ($courses as $course): ?>
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div
+                        class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $course['Image_couverture']; ?>')] bg-cover bg-center">
+                        <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
+                    </div>
 
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
+                        </div>
+                        <p class="text-sm text-gray-500"><?php echo $course['date_creation'];?></p>
+                        <h3 class="text-xl font-bold text-teal-700 mt-2"><?php echo $course['titre'];?></h3>
+                        <p class="text-sm text-gray-600 mt-2"><?php echo $course['description'];?></p>
+                        <div class="flex items-center justify-between mt-4">
+                            <div class="flex items-center">
+                                <span class="text-[#FF6B38] font-bold">$380</span>
+                                <span class="text-gray-400 line-through ml-2">$500</span>
+                            </div>
+                            <form action="" method="post">
+                                <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800" name="enrole">Enroll
+                                    Now
+                                    <input type="hidden" name="cours_id" value="<?= $course['id']; ?>">
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
                 </div>
-                <p class="text-sm text-gray-500"><?php echo $Serching['date_creation'];?></p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2"><?php echo $Serching['titre'];?></h3>
-                <p class="text-sm text-gray-600 mt-2"><?php echo $Serching['description'];?></p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-span-4 text-center py-8">
+                <p class="text-gray-500">No courses found.</p>
             </div>
-        </div>
-
-        <?php endforeach; ?>
-        <?php else:?>
-        <?php foreach($getAllCourses as $cours): ?>
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-            <div
-                class="p-8 flex items-center justify-center bg-[url('Enseignant/<?php echo $cours['Image_couverture']; ?>')] bg-cover bg-center">
-                <div class="w-32 h-32 bg-white/20 rounded-lg"></div>
-            </div>
-
-            <div class="p-6">
-                <div class="flex items-center mb-4">
-                    <div class="flex -space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white"></div>
-                        <div class="w-8 h-8 rounded-full bg-gray-500 border-2 border-white"></div>
-                    </div>
-                    <span class="ml-2 text-sm text-gray-600">+ 40 students</span>
-                </div>
-                <p class="text-sm text-gray-500"><?php echo $cours['date_creation'];?></p>
-                <h3 class="text-xl font-bold text-teal-700 mt-2"><?php echo $cours['titre'];?></h3>
-                <p class="text-sm text-gray-600 mt-2"><?php echo $cours['description'];?></p>
-                <div class="flex items-center justify-between mt-4">
-                    <div class="flex items-center">
-                        <span class="text-[#FF6B38] font-bold">$380</span>
-                        <span class="text-gray-400 line-through ml-2">$500</span>
-                    </div>
-                    <button class="px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-800">Enroll
-                        Now</button>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; ?>
-        <?php endif;?>
+        <?php endif; ?>
     </div>
 
+    <!-- Pagination Navigation -->
     <div class="flex justify-center items-center space-x-2 mt-12">
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-teal-700 hover:text-teal-700 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
+        <?php if($page > 1): ?>
+            <a href="?page=<?php echo $page - 1 ?><?php echo isset($_GET['ValueSearching']) ? '&ValueSearching=' . urlencode($_GET['ValueSearching']) : '' ?>" 
+               class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-teal-700 hover:text-teal-700 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+        <?php endif; ?>
 
-        <button class="w-10 h-10 flex items-center justify-center rounded-full bg-teal-700 text-white">
-            1
-        </button>
+        <?php for($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?page=<?php echo $i ?><?php echo isset($_GET['ValueSearching']) ? '&ValueSearching=' . urlencode($_GET['ValueSearching']) : '' ?>" 
+               class="w-10 h-10 flex items-center justify-center rounded-full border <?php echo $i === $page ? 'bg-teal-700 text-white' : 'border-gray-300 hover:border-teal-700 hover:text-teal-700' ?> transition-colors">
+                <?php echo $i ?>
+            </a>
+        <?php endfor; ?>
 
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 hover:text-teal-700 transition-colors">
-            2
-        </button>
-
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 hover:text-teal-700 transition-colors">
-            3
-        </button>
-
-        <span class="text-gray-500">...</span>
-
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 hover:text-teal-700 transition-colors">
-            8
-        </button>
-
-        <button
-            class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-teal-700 hover:text-teal-700 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
+        <?php if($page < $total_pages): ?>
+            <a href="?page=<?php echo $page + 1 ?><?php echo isset($_GET['ValueSearching']) ? '&ValueSearching=' . urlencode($_GET['ValueSearching']) : '' ?>" 
+               class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:border-teal-700 hover:text-teal-700 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        <?php endif; ?>
     </div>
 </div>

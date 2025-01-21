@@ -134,6 +134,7 @@
         </form>
     </div>
 </div>
+
 <script>
 const tagsContainer = document.getElementById("tags-container");
 const tags = tagsContainer.querySelectorAll(".tag input[type='checkbox']");
@@ -154,6 +155,7 @@ tags.forEach(tag => {
 let typeSelect = document.querySelector('#typeSelect');
 let documentContainer = document.querySelector('#document_container');
 let videoContainer = document.querySelector('#video_container');
+let containerEditCours = document.querySelector('.container.editCourses');
 
 typeSelect.addEventListener('change', function() {
     videoContainer.classList.add('hidden');

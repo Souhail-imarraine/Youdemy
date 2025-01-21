@@ -18,6 +18,9 @@ class Cours {
     public function createCourse(){
 
     }
+    public function editCourse(){
+        
+    }
 
     public function deleteCours($cours_id){
         $query = "DELETE FROM cours WHERE id = :cours_id ";

@@ -42,13 +42,12 @@ class Enseignant extends Utilisateur {
             GROUP BY 
                 u.id;
             ";
-            
+
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':enseignant_id'=> $user_id]);
         $results = $stmt->fetch(PDO::FETCH_ASSOC);
         return $results;
     }
-
     }
 
 

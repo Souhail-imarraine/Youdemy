@@ -6,7 +6,7 @@ class Utilisateur {
     protected string $email;
     protected string $password;
     protected string $role;
-    protected string $status = 'active'; 
+    protected string $status; 
     private $errors = [];
     private $pdo;
 
@@ -17,7 +17,7 @@ class Utilisateur {
     
     /***** ==== register ====  *****/
 
-    public function register($name, $email, $password, $role){
+    public function register($name, $email, $password, $role, $status){
         if(empty($name)){
             array_push($this->errors, "Le nom d'utilisateur est requis");
         } elseif(strlen($name) < 3 || strlen($name) > 20){
@@ -48,7 +48,7 @@ class Utilisateur {
                     ':email'=> $email,
                     ':mot_de_passe'=> $passwordHash,
                     'role' => $role,
-                    ':status' => $this->status
+                    ':status' => $status
                 ]);
                 return true;
             }

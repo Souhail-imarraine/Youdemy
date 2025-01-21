@@ -2,6 +2,8 @@
 require_once './config/database.php';
 require_once './classes/cours.php';
 require_once './classes/utilisateur.php';
+require_once './classes/etudiant.php';
+session_start();
 
 $database = new Database();
 $pdo = $database->getConnection();
@@ -9,12 +11,31 @@ $pdo = $database->getConnection();
 $cours = new Cours($pdo);
 $getAllCourses = $cours->selectAllCourses();
 
-// Assuming Utilisateur is a class that contains the search method
 $utilisateur = new Utilisateur($pdo);
+$etudient = new Etudiant($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['ValueSearching'])) {
     $searchTerm = trim($_GET['ValueSearching']);
     $resultSerching = $utilisateur->SerchingCourses($searchTerm);
+
+}
+
+// var_dump($_SESSION);
+// die();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enrole'])) {
+    $student_id = $_SESSION['id'];
+    $cours_id = $_POST['cours_id'];
+
+    if(isset($_SESSION['is_login']) || $_SESSION['role'] == 'Etudiant'){
+        $enrollement = $etudient->enrollCourse($student_id, $cours_id);
+        if($enrollement){
+            header('location: index.php');
+        }
+    }else{
+        header('location: signin.php');
+    }
+
+    
 }
 
 ?>
@@ -47,8 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['ValueSearching'])) {
                 <a href="#" class="text-gray-600">About Us</a>
             </div>
             <div class="flex items-center space-x-4">
-                <button class="px-6 py-2 text-teal-800 font-medium"><a href="signin.php">LOG IN</a></button>
-                <button class="px-6 py-2 bg-teal-800 text-white rounded-md font-medium"><a href="signup.php">SIGN UP</a></button>
+                <?php if(!isset($_SESSION['is_login'])): ?>
+                    <button class="px-6 py-2 text-teal-800 font-medium"><a href="signin.php">LOG IN</a></button>
+                    <button class="px-6 py-2 bg-teal-800 text-white rounded-md font-medium"><a href="signup.php">SIGN UP</a></button>
+                <?php else: ?>
+                    <span class="text-teal-800">Welcome, <?php echo htmlspecialchars($_SESSION['username'] ?? ''); ?></span>
+                    <button class="px-6 py-2 bg-red-600 text-white rounded-md font-medium">
+                        <a href="logout.php">Logout</a>
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
