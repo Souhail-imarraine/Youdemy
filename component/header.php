@@ -17,13 +17,14 @@ $etudient = new Etudiant($pdo);
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['ValueSearching'])) {
     $searchTerm = trim($_GET['ValueSearching']);
     $resultSerching = $utilisateur->SerchingCourses($searchTerm);
-
 }
 
-// var_dump($_SESSION);
-// die();
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enrole'])) {
+if(isset($_SESSION['is_login'])){
     $student_id = $_SESSION['id'];
+    $getMyEnrollments = $etudient->getMyEnrollments($student_id);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enrole'])) {
     $cours_id = $_POST['cours_id'];
 
     if(isset($_SESSION['is_login']) || $_SESSION['role'] == 'Etudiant'){
@@ -34,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enrole'])) {
     }else{
         header('location: signin.php');
     }
-
-    
 }
+
+
 
 ?>
 <!DOCTYPE html>

@@ -1,6 +1,5 @@
 <?php
 require_once '../action/supprimerCours.php';
-
 ?>
 <main class="flex-1 p-4 md:p-8 mt-16 md:ml-64 transition-all duration-300 container cours">
     <div class="mb-8">
@@ -30,24 +29,19 @@ require_once '../action/supprimerCours.php';
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            image
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Image
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Titre
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Enseignant
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Catégorie
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Actions
                         </th>
                     </tr>
@@ -70,18 +64,23 @@ require_once '../action/supprimerCours.php';
                             <div class="text-sm text-gray-900"><?= $getCours['nom'] ?></div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                                 <?= $getCours['categories'] ?>
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-3">
-                                <form action="" method="post">
-                                    <button class="text-red-600 hover:text-red-900" title="Supprimer"
-                                        name="btnSupprimer">
+                                <a href="gerieModules.php?course_id=<?= $getCours['id'] ?>" 
+                                   class="text-teal-600 hover:text-teal-900" 
+                                   title="Gérer les modules">
+                                    <i class="fas fa-book-open"></i>
+                                </a>
+                                <form action="" method="post" class="inline-block">
+                                    <button class="text-red-600 hover:text-red-900" 
+                                            title="Supprimer" 
+                                            name="btnSupprimer">
                                         <i class="fas fa-trash-alt"></i>
-                                        <input type="hidden" name="cours_id" value="<?= $getCours['id'];?>">
+                                        <input type="hidden" name="cours_id" value="<?= $getCours['id'] ?>">
                                     </button>
                                 </form>
                             </div>

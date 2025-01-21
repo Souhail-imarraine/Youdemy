@@ -148,7 +148,7 @@
         <?php endif; ?>
     </div>
 
-    <!-- Pagination Navigation -->
+
     <div class="flex justify-center items-center space-x-2 mt-12">
         <?php if($page > 1): ?>
             <a href="?page=<?php echo $page - 1 ?><?php echo isset($_GET['ValueSearching']) ? '&ValueSearching=' . urlencode($_GET['ValueSearching']) : '' ?>" 

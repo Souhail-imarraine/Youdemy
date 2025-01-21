@@ -18,7 +18,8 @@ $AfichageCourses = $enseignant->SelectAllCourse($enseignant_id);
 
 $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
 
-
+$studentEnseignant = $enseignant->getStudentCourseEnrollments();
+// print_r($studentEnseignant);
 ?>
 
 

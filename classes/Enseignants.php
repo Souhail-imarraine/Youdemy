@@ -48,6 +48,31 @@ class Enseignant extends Utilisateur {
         $results = $stmt->fetch(PDO::FETCH_ASSOC);
         return $results;
     }
+
+    public function getStudentCourseEnrollments() {
+        $query = "SELECT 
+            u.nom AS etudiant_name,
+            c.titre AS course_title,
+            inc.date_inscription AS date_inscription
+        FROM 
+            inscriptioncours inc
+        INNER JOIN 
+            utilisateur u 
+        ON 
+            inc.etudiant_id = u.id
+        INNER JOIN 
+            cours c 
+        ON 
+            inc.cours_id = c.id
+        WHERE 
+            u.role = 'Etudiant'; ";
+        
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     }
 
 

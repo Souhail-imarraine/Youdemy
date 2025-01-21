@@ -22,8 +22,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Students Table -->
                     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
                         <table class="w-full">
                             <thead class="bg-gray-50 border-b border-gray-200">
@@ -40,13 +38,10 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Date d'inscription
                                     </th>
-                                    <th
-                                        class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
+                                <?php foreach($studentEnseignant as $student): ?>
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -54,25 +49,18 @@
                                                 <img src="student1.jpg" alt="" class="w-full h-full rounded-full">
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Jean Dupont</div>
-                                                <div class="text-sm text-gray-500">jean.dupont@example.com</div>
+                                                <div class="text-sm font-medium text-gray-900"><?= $student['etudiant_name'] ?></div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Développement Web Avancé</div>
-                                        <div class="text-xs text-gray-500">Frontend</div>
+                                        <div class="text-sm text-gray-900"><?= $student['course_title'];?></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">15 Mars 2024</div>
-                                        <div class="text-xs text-gray-500">14:30</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-red-600 hover:text-red-900">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div class="text-sm text-gray-900"><?= $student['date_inscription'];?></div>
                                     </td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

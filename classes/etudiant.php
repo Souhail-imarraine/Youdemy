@@ -25,8 +25,11 @@ class Etudiant extends Utilisateur {
         }
     }
 
-    public function getMyEnrollments(int $student_id) {
-
+    public function getMyEnrollments($student_id) {
+        $query = "SELECT *, inc.cours_id, inc.date_inscription FROM cours c INNER JOIN inscriptioncours inc ON c.id = inc.cours_id WHERE inc.etudiant_id = :etudiant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':etudiant_id' => $student_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
