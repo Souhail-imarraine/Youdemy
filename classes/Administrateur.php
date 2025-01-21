@@ -68,7 +68,12 @@ class Administrateur extends Utilisateur {
     
 
     public function deleteTeacher($teacher_id){
+        $query = "DELETE FROM utilisateur WHERE id = :teacher_id AND role = 'Enseignant';";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute([':teacher_id' => $teacher_id]);
+        return true;
     }
+    
 
     public function manageContent(){
     }
@@ -171,12 +176,37 @@ public function securiterSession(){
 }
 
 public function selectALLRequestPending() {
-    $query = "SELECT nom, email, status FROM utilisateur WHERE role = :role";
+    $query = "SELECT id, nom, email, status FROM utilisateur WHERE role = :role";
     $stmt = $this->connexion->prepare($query); 
     $stmt->execute([':role' => 'Enseignant']);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+public function selectALLutilisateur(){
+    $query = "SELECT COUNT(id) AS total FROM utilisateur WHERE role = 'Enseignant' OR role = 'Etudiant';";
+    $stmt = $this->connexion->query($query);
+    return $stmt->fetchColumn();
+}
+
+public function acceptEnseignant($id_enseignant){
+    $query = "UPDATE utilisateur SET status = :status WHERE id = :id_enseignant";
+    $stmt = $this->connexion->prepare($query);
+    $stmt->execute([
+        ':status' => 'Active',
+        ':id_enseignant' => $id_enseignant
+    ]);
+    return true;
+}
+
+public function debanUser($id_enseignant){
+    $query = "UPDATE utilisateur SET status = :status WHERE id = :id_enseignant";
+    $stmt = $this->connexion->prepare($query);
+    $stmt->execute([
+        ':status' => 'Active',
+        ':id_enseignant' => $id_enseignant
+    ]);
+    return true;
+}
 
 }
 

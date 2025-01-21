@@ -88,8 +88,9 @@
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
                                     <form action="" method="post">
-                                        <button class="text-red-600 hover:text-red-900">
+                                        <button class="text-red-600 hover:text-red-900" name="deleteEneignant">
                                             <i class="fas fa-trash-alt"></i>
+                                            <input type="hidden" name="enseignant_id" value="<?= $teatchers['id']; ?>">
                                         </button>
                                         <button class="text-red-600 hover:text-red-900" title="Désactiver"
                                             name="btnBan">

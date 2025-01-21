@@ -50,6 +50,9 @@ $getCoursesWithTeachersAndCategories = $administrateur->getCoursesWithTeachersAn
 
 $getAllCategories = $administrateur->getAllCategories();
 
+$selectALLutilisateur = $administrateur->selectALLutilisateur();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
     $categoryName = trim($_POST['categoryName']);
     if (!empty($categoryName)) {
@@ -62,7 +65,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
 
 
 $selectALLRequestPending = $administrateur->selectALLRequestPending();
-print_r($selectALLRequestPending);
+// print_r($selectALLRequestPending);
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Approuver'])){
+    $enseignant_id = $_POST['enseignant_id'];
+    $accepterRequest = $administrateur->acceptEnseignant($enseignant_id);
+    if($accepterRequest){
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+    }
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Unban'])){
+    $enseignant_id = $_POST['enseignant_id'];
+
+    $debanUser = $administrateur->debanUser($enseignant_id);
+    if($debanUser){
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+    }
+}
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteEneignant'])){
+    $enseignant_id = $_POST['enseignant_id'];
+
+    $deleteTeacher = $administrateur->deleteTeacher($enseignant_id);
+    if($deleteTeacher){
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -360,7 +388,7 @@ print_r($selectALLRequestPending);
                             <i class="fas fa-arrow-up mr-1"></i>+12%
                         </span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900">1,234</h3>
+                    <h3 class="text-2xl font-bold text-gray-900"><?= $selectALLutilisateur ?></h3>
                     <p class="text-gray-600 text-sm">Utilisateurs totaux</p>
                 </div>
 
@@ -408,22 +436,31 @@ print_r($selectALLRequestPending);
                                 </div>
                             </div>
                             <div class="flex space-x-2">
-                                <?php if($requests['status'] == 'pending'): ?>
-                                <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
-                                    <i class="fas fa-check mr-1"></i>Approuver
-                                </button>
-                                <button class="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
-                                    <i class="fas fa-times mr-1"></i>Refuser
-                                </button>
-                                <?php elseif($requests['status'] == 'suspended'): ?>
-                                <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
-                                    <i class="fas fa-check mr-1"></i>Active
-                                </button>
-                                <?php elseif($requests['status'] == 'active'): ?>
-                                <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
-                                    <i class="fas fa-check mr-1"></i>suspended
-                                </button>
-                                <?php endif; ?>
+                                <form action="" method="post">
+                                    <?php if($requests['status'] == 'pending'): ?>
+                                    <button
+                                        class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700"
+                                        name="Approuver">
+                                        <i class="fas fa-check mr-1"></i>Approuver
+                                    </button>
+                                    <button class="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
+                                        <i class="fas fa-times mr-1"></i>Refuser
+                                        <input type="hidden" name="enseignant_id" value="<?= $requests['id']; ?>">
+                                    </button>
+                                    <?php elseif($requests['status'] == 'suspended'): ?>
+                                    <button
+                                        class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700" name="Unban">
+                                        <i class="fas fa-check mr-1"></i>Unban
+                                        <input type="hidden" name="enseignant_id" value="<?= $requests['id']; ?>">
+                                    </button>
+                                    <?php elseif($requests['status'] == 'Active'): ?>
+                                    <button
+                                        class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
+                                        <i class="fas fa-check mr-1"></i>suspended
+                                        <input type="hidden" name="enseignant_id" value="<?= $requests['id']; ?>">
+                                    </button>
+                                    <?php endif; ?>
+                                </form>
                             </div>
                         </div>
                         <?php endforeach; ?>
