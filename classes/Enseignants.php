@@ -9,7 +9,6 @@ class Enseignant extends Utilisateur {
         $this->pdo = $pdo;
     }
 
-    // total courses
     public function getCourseCount($enseignant_id) {
         $query = "SELECT COUNT(*) FROM cours WHERE enseignant_id = :enseignant_id";
         $stmt = $this->pdo->prepare($query);

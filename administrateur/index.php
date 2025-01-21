@@ -8,8 +8,25 @@ $database = new Database();
 $pdo = $database->getConnection();
 
 $administrateur = new Administrateur($pdo);
-
 $session = $administrateur->securiterSession();
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btnBan'])){
+    $enseignant_id = $_POST['enseignant_id'];
+    $banEnseignat = $administrateur->banTeachers($enseignant_id);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['btnDelete']) || isset($_POST['btnAjouterTag'])) {
+        require_once 'gerieTags.php';
+        if ($afficherAllTags) {
+            header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+            exit();
+        } else {
+            header('Location: ' . $_SERVER['PHP_SELF'] . '?error=true');
+            exit();
+        }
+    }
+}
 
 $categories = new Categorie($pdo);
 
@@ -43,6 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
     }
 }
 
+
+$selectALLRequestPending = $administrateur->selectALLRequestPending();
+print_r($selectALLRequestPending);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -169,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
                                     class="flex items-center space-x-3 focus:outline-none hover:bg-gray-50 rounded-lg p-2">
                                     <div class="relative">
                                         <img class="h-9 w-9 rounded-full border-2 border-gray-200 object-cover"
-                                            src="/images/avatar.jpg" alt="Profile">
+                                            src="../protfolio-img04.jpg" alt="Profile">
                                         <span
                                             class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white">
                                         </span>
@@ -378,23 +398,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['categoryName'])) {
                         <button class="text-sm text-teal-600 hover:text-teal-700">Voir tout</button>
                     </div>
                     <div class="space-y-4">
+                        <?php foreach($selectALLRequestPending as $requests): ?>
                         <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                             <div class="flex items-center space-x-3">
-                                <img src="teacher1.jpg" alt="Teacher" class="h-10 w-10 rounded-full">
+                                <img src="../protfolio-img04.jpg" alt="Teacher" class="h-10 w-10 rounded-full">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-900">Marie Dupont</p>
-                                    <p class="text-xs text-gray-500">Développement Web</p>
+                                    <p class="text-sm font-medium text-gray-900"><?= $requests['nom'];?></p>
+                                    <p class="text-xs text-gray-500"><?= $requests['email'];?></p>
                                 </div>
                             </div>
                             <div class="flex space-x-2">
+                                <?php if($requests['status'] == 'pending'): ?>
                                 <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
                                     <i class="fas fa-check mr-1"></i>Approuver
                                 </button>
                                 <button class="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
                                     <i class="fas fa-times mr-1"></i>Refuser
                                 </button>
+                                <?php elseif($requests['status'] == 'suspended'): ?>
+                                <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
+                                    <i class="fas fa-check mr-1"></i>Active
+                                </button>
+                                <?php elseif($requests['status'] == 'active'): ?>
+                                <button class="px-3 py-1 bg-teal-600 text-white text-sm rounded-lg hover:bg-teal-700">
+                                    <i class="fas fa-check mr-1"></i>suspended
+                                </button>
+                                <?php endif; ?>
                             </div>
                         </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 

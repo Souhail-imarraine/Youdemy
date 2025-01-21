@@ -9,9 +9,11 @@ class Tag {
         $this->connexion = $pdo;
     }
 
-    public function createTag(){
-        
-
+    public function createTag($name_tags){
+        $query = 'INSERT INTO tag (nom) VALUES (:nom)';
+        $stmt = $this->connexion->prepare($query); 
+        $stmt->execute([':nom' => $name_tags]);
+        return true;
     }
 
     public function deleteTag(int $tag_id) {

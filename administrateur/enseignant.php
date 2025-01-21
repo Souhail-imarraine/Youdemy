@@ -11,7 +11,9 @@
                     class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
                     <div class="flex items-center space-x-4">
                         <h2 class="text-lg font-semibold text-gray-900">Liste des Enseignants</h2>
-                            <span class="px-3 py-1 text-sm text-teal-600 bg-teal-50 rounded-full"><?= $TotalCountTeachers['totalTeatcher'];?> Total</span>
+                        <span
+                            class="px-3 py-1 text-sm text-teal-600 bg-teal-50 rounded-full"><?= $TotalCountTeachers['totalTeatcher'];?>
+                            Total</span>
                     </div>
                     <div class="flex space-x-3">
                         <div class="relative">
@@ -66,7 +68,7 @@
                                             <?= $teatchers['nom'];?>
                                         </div>
                                         <div class="text-sm text-gray-500">
-                                        <?= $teatchers['email'];?>
+                                            <?= $teatchers['email'];?>
                                         </div>
                                     </div>
                                 </div>
@@ -85,12 +87,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <button class="text-red-600 hover:text-red-900">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                    <button class="text-red-600 hover:text-red-900" title="Désactiver">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
+                                    <form action="" method="post">
+                                        <button class="text-red-600 hover:text-red-900">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button class="text-red-600 hover:text-red-900" title="Désactiver"
+                                            name="btnBan">
+                                            <i class="fas fa-ban"></i>
+                                            <input type="hidden" name="enseignant_id" value="<?= $teatchers['id']; ?>">
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

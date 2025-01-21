@@ -41,7 +41,7 @@ class Administrateur extends Utilisateur {
 
     public function getAllTeachers()
     {
-        $query = "SELECT COUNT(u.id) AS total_enseignant, u.nom, u.email, u.date_creation, u.status, COUNT(c.id) AS total_cours, COUNT(inc.id) as total_student 
+        $query = "SELECT COUNT(u.id) AS total_enseignant, u.id, u.nom, u.email, u.date_creation, u.status, COUNT(c.id) AS total_cours, COUNT(inc.id) as total_student 
                 FROM utilisateur u
                 LEFT JOIN cours c ON u.id = c.enseignant_id
                 LEFT JOIN inscriptioncours inc ON c.id = inc.cours_id
@@ -55,8 +55,17 @@ class Administrateur extends Utilisateur {
     }
     
 
-    public function modifyTeacher($teacher_id){
+    public function banTeachers($teacher_id) {
+        $query = 'UPDATE utilisateur SET status = :status WHERE id = :teacher_id AND role = :role';
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute([
+            ':status' => 'suspended',
+            ':teacher_id' => $teacher_id,
+            ':role' => 'Enseignant' 
+        ]);
+        return true;
     }
+    
 
     public function deleteTeacher($teacher_id){
     }
@@ -160,6 +169,14 @@ public function securiterSession(){
         die();
     }
 }
+
+public function selectALLRequestPending() {
+    $query = "SELECT nom, email, status FROM utilisateur WHERE role = :role";
+    $stmt = $this->connexion->prepare($query); 
+    $stmt->execute([':role' => 'Enseignant']);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 }
 

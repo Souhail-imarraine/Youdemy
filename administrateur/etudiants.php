@@ -78,9 +78,6 @@
                                     <button class="text-teal-600 hover:text-teal-900" title="Voir le profil">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button class="text-blue-600 hover:text-blue-900" title="Modifier">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
                                     <button class="text-red-600 hover:text-red-900" title="Désactiver">
                                         <i class="fas fa-ban"></i>
                                     </button>

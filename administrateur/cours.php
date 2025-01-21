@@ -1,3 +1,7 @@
+<?php
+require_once '../action/supprimerCours.php';
+
+?>
 <main class="flex-1 p-4 md:p-8 mt-16 md:ml-64 transition-all duration-300 container cours">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-gray-900">Gestion des Cours</h1>
@@ -54,8 +58,8 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded object-cover" src="../Enseignant/<?= $getCours['image'] ?>"
-                                        alt="Course thumbnail">
+                                    <img class="h-10 w-10 rounded object-cover"
+                                        src="../Enseignant/<?= $getCours['image'] ?>" alt="Course thumbnail">
                                 </div>
                             </div>
                         </td>
@@ -73,15 +77,13 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-3">
-                                <button class="text-teal-600 hover:text-teal-900" title="Voir le cours">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="text-blue-600 hover:text-blue-900" title="Modifier">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900" title="Supprimer">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <form action="" method="post">
+                                    <button class="text-red-600 hover:text-red-900" title="Supprimer"
+                                        name="btnSupprimer">
+                                        <i class="fas fa-trash-alt"></i>
+                                        <input type="hidden" name="cours_id" value="<?= $getCours['id'];?>">
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
