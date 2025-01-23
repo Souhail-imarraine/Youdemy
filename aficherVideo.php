@@ -9,7 +9,8 @@ $cours = new Cours($pdo);
 
 if(isset($_GET['id_cours'])){
     $courseInfo = $cours->getCourseEnrolById(intval($_GET['id_cours']));
-    var_dump($courseInfo);
+    // var_dump($courseInfo);
+    // die();
 }
 ?>
 
@@ -89,9 +90,17 @@ if(isset($_GET['id_cours'])){
                             Your browser does not support the video tag.
                         </video>
                         <?php elseif($courseInfo['type'] == 'Document'): ?>
-                            <iframe src="Enseignant/<?= htmlspecialchars($courseInfo['contenu_document'] ?? '') ?>" frameborder="0">
-
-                            </iframe>
+                            <div class="w-full h-full">
+                                <iframe 
+                                    src="Enseignant/<?= htmlspecialchars($courseInfo['contenu_document'] ?? '') ?>" 
+                                    width="100%" 
+                                    height="600px" 
+                                    class="w-full border-0"
+                                    style="min-height: 600px;"
+                                >
+                                    <p>Your browser does not support iframes. Please <a href="Enseignant/<?= htmlspecialchars($courseInfo['contenu_document'] ?? '') ?>">download the document</a> to view it.</p>
+                                </iframe>
+                            </div>
                         <?php endif; ?>
                     </div>
                     <div class="p-6">

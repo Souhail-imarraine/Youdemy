@@ -67,7 +67,7 @@ class Utilisateur {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([':email' => $email]);
             $userExist = $stmt->fetch(PDO::FETCH_ASSOC); 
-        
+                    
             if (!$userExist) {
                 array_push($this->errors, "Cet email n'a pas ete trouve");
             } else {
@@ -77,6 +77,7 @@ class Utilisateur {
                     $_SESSION['id'] = $userExist['id'];
                     $_SESSION['role'] = $userExist['role'];
                     $_SESSION['nom'] = $userExist['nom'];
+                    $_SESSION['status'] = $userExist['status'];
                     return true;
                 } else {
                     array_push($this->errors, "Mot de passe invalide");

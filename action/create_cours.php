@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['creat_cours'])) {
     $titre = htmlspecialchars($_POST['titre']);
     $description = htmlspecialchars($_POST['description']);
     $category_id = htmlspecialchars($_POST['category']);
-    $tags = $_POST['tags'] ;
+    $tags = $_POST['tags'] ?? [] ;
     $type = $_POST['type'];
 
     // image de couverture **************************

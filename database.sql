@@ -45,13 +45,6 @@ CREATE TABLE InscriptionCours (
     FOREIGN KEY (cours_id) REFERENCES Cours(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Statistiques (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    cours_id INT NOT NULL,
-    nb_etudiants INT DEFAULT 0,
-    date_mise_a_jour TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (cours_id) REFERENCES Cours(id) ON DELETE CASCADE
-);
 
 -- -- Données de test
 -- INSERT INTO Utilisateur (nom, email, mot_de_passe, role)

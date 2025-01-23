@@ -20,6 +20,7 @@ $totalInscrire = $enseignant->getCourseEnrollments($enseignant_id);
 
 $studentEnseignant = $enseignant->getStudentCourseEnrollments();
 // print_r($studentEnseignant);
+
 ?>
 
 
@@ -140,6 +141,8 @@ $studentEnseignant = $enseignant->getStudentCourseEnrollments();
                 </div>
             </header>
 
+
+            <?php if($_SESSION['status'] === 'active'): ?>
             <div class="container dashboard p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm">
@@ -159,7 +162,8 @@ $studentEnseignant = $enseignant->getStudentCourseEnrollments();
                             </div>
                             <span class="text-sm text-green-500">+12% ce mois</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800"><?= $totalInscrire['total_inscriptions'] ?? '0';?></h3>
+                        <h3 class="text-2xl font-bold text-gray-800"><?= $totalInscrire['total_inscriptions'] ?? '0';?>
+                        </h3>
                         <p class="text-gray-500">Étudiants inscrits</p>
                     </div>
                 </div>
@@ -238,6 +242,11 @@ $studentEnseignant = $enseignant->getStudentCourseEnrollments();
             <?php require_once 'Courses.php' ?>
             <!-- inscription -->
             <?php require_once 'inscriptions.php' ?>
+
+            <?php else: ?>
+            <?php echo "your request is proccesing..." ;?>
+            <?php endif;?>
+            
         </div>
         <script>
         let Btnprofil = document.querySelector('.Btnprofil');
@@ -296,6 +305,7 @@ $studentEnseignant = $enseignant->getStudentCourseEnrollments();
             containerInscription.classList.remove('hidden');
         });
         </script>
+
 </body>
 
 </html>
